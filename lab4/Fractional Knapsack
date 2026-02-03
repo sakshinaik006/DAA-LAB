@@ -1,0 +1,41 @@
+import java.util.*;
+
+public class Main {
+	public static void main(String[] args) {
+
+		Scanner sc = new Scanner(System.in);
+
+		int n = sc.nextInt();
+
+		int[] wt = new int[n];
+		int[] val = new int[n];
+
+		for (int i = 0; i < n; i++) {
+			wt[i] = sc.nextInt();
+		}
+
+		for (int i = 0; i < n; i++) {
+			val[i] = sc.nextInt();
+		}
+		int capacity = sc.nextInt();
+		double[][] ratio = new double[n][2];
+		for (int i = 0; i < n; i++) {
+			ratio[i][0] = (double) val[i] / wt[i];
+			ratio[i][1] = i;
+		}
+		Arrays.sort(ratio, (a, b) -> Double.compare(b[0], a[0]));
+		double tp = 0.0;
+		for (int i = 0; i < n; i++) {
+			int a = (int) ratio[i][1];
+			if (capacity >= wt[a]) {
+				tp += val[a];
+				capacity -= wt[a];
+			} else {
+				tp += ratio[i][0] * capacity;
+				break;
+			}
+		}
+		System.out.println(tp);
+		sc.close();
+	}
+}
