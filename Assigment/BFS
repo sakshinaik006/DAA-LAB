@@ -1,6 +1,5 @@
 public static List<Integer> bfs(int n, int m, List<List<Integer>> edges, int s) {
 
-    // STEP 1: Build adjacency list
     Map<Integer, List<Integer>> graph = new HashMap<>();
     for (int i = 1; i <= n; i++) {
         graph.put(i, new ArrayList<>());
@@ -12,14 +11,12 @@ public static List<Integer> bfs(int n, int m, List<List<Integer>> edges, int s) 
         graph.get(v).add(u);
     }
 
-    // STEP 2: Initialize BFS
     int[] dist = new int[n + 1];
     Arrays.fill(dist, -1);       // mark all as unreachable
     dist[s] = 0;                 // start node distance = 0
     Queue<Integer> queue = new LinkedList<>();
     queue.add(s);                // enqueue start node
 
-    // STEP 3: BFS Traversal
     while (!queue.isEmpty()) {
         int node = queue.poll();                    // dequeue
         for (int neighbor : graph.get(node)) {
@@ -30,7 +27,6 @@ public static List<Integer> bfs(int n, int m, List<List<Integer>> edges, int s) 
         }
     }
 
-    // STEP 4: Collect results (exclude start node)
     List<Integer> result = new ArrayList<>();
     for (int i = 1; i <= n; i++) {
         if (i != s) {
